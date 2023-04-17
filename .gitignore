@@ -1,0 +1,16 @@
+*.pyc
+*.fits
+*.egg-info/
+config.json
+.DS_Store
+.idea
+.coverage*
+build/
+dist/
+jwql.egg-info/
+docs/build/
+docs/source/api/
+.cache
+*.pytest_cache
+htmlcov/
+*.sqlite3
