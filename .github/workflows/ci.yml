@@ -1,0 +1,39 @@
+name: pastasoss ci
+
+on: [push, pull_request]
+
+jobs:
+
+  pastasoss-ci:
+
+    name: Python - ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 5
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: [3.9, 3.10]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pastasoss and run tests
+        shell: bash -l {0}
+        run: |
+
+          echo "Setting useful environment variables:"
+          echo " "
+          export PYTHONVERSION=${{ matrix.python-version }}
+          export MAJOR="$(echo $PYTHONVERSION | head -c 1)"
+          export MINOR="$(echo $PYTHONVERSION | tail -c 2)"
+          echo "PYTHONVERSION: $PYTHONVERSION"
+
+          echo " "
+          echo "Installing pastasoss package"
+          echo " "
+          python setup.py develop
+
+          echo " "
+          echo "Running pytests"
+          echo " "
+          pytest pastasoss/tests/
