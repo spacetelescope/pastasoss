@@ -1,0 +1,45 @@
+[project]
+name = "pastasoss"
+description = "Predicting Accurate Spectral Traces for Astrophysical SOSS Spectra"
+readme = "README.md"
+authors = [
+  { name = "Tyler Baines" },
+]
+keywords = ["astronomy", "python"]
+classifiers = ["Programming Language :: Python"]
+dependencies = [
+  "numpy",
+  "numpydoc",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = [
+  "pytest",
+  "pytest-cov",
+  "pytest-mock",
+]  
+docs = [
+  "sphinx",
+  "sphinx_rtd_theme",
+  "stsci_rtd_theme",
+]
+
+[project.license]
+file = "LICENSE"
+content-type = "text/plain"
+
+[build-system]
+requires = ["setuptools>=61.2,<=65.5.0", "numpy", "wheel", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+namespaces = false
+
+[tool.setuptools_scm]
+
+[tool.pytest]
+junit_family = "xunit2"
