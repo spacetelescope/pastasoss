@@ -8,6 +8,8 @@ authors = [
 keywords = ["astronomy", "python"]
 classifiers = ["Programming Language :: Python"]
 dependencies = [
+  "jupyter",
+  "matplotlib",
   "numpy",
   "numpydoc",
 ]
@@ -38,6 +40,7 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 namespaces = false
+where = ["pastasoss"]
 
 [tool.setuptools_scm]
 
