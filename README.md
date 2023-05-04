@@ -2,7 +2,7 @@
 
 Predicting Accurate Spectral Traces in Astrophysical SOSS Spectra
 
-By: Tyler Baines, STScI Science Support Analyst (NIRISS/SOSS) email: tbaines@stsci.edu
+By: Tyler Baines, STScI Science Support Analyst (NIRISS/SOSS Team) email: tbaines@stsci.edu
 
 STATUS: Work In Progress - 05/2023
 - Solving some minors bugs resulting the package failing to import in a juypter notebook. Should be resolved soon.
