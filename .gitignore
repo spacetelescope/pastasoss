@@ -14,3 +14,4 @@ docs/source/api/
 *.pytest_cache
 htmlcov/
 *.sqlite3
+*.ipynb_checkpoints

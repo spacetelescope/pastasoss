@@ -6,11 +6,12 @@ from typing import  Tuple, Union
 
 import numpy as np
 import os
+from pkg_resources import resource_filename
 
 
 PWCPOS_CMD = 245.7600  # reference commanded position angle for the GR700XD
 
-DATADIR = os.path.dirname(os.path.abspath("__file__"))
+DATADIR = resource_filename('pastasoss', 'data')
 
 # order 3 currently unsupport ATM. Will be support in the future: TBD
 REFERENCE_TRACE_FILES = {
