@@ -7,6 +7,7 @@ from typing import  Tuple, Union
 import numpy as np
 import os
 
+# __all__ = ['rotate', 'get_reference_traces_positions', 'get_trace_from_reference_transform']
 
 PWCPOS_CMD = 245.7600  # reference commanded position angle for the GR700XD
 
@@ -90,7 +91,7 @@ def get_reference_traces_positions(file: str) -> Tuple[np.ndarray, np.ndarray, n
 
     Examples
     --------
-    >>> x, y, origin = get_reference_traces_positions('reference_traces.txt')
+    >>> x, y, origin = get_reference_traces_positions('reference_trace_filename.txt')
     """
     traces = np.loadtxt(file)
     origin = traces[0]
