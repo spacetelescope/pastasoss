@@ -2,24 +2,30 @@
 # given the  a pupil wheel position angle taken from the "PWCPOS" fits
 # header keyword. 
 
+#/Users/tbaines/miniconda3/envs/pasta-soss-3.9/lib/python3.9/site-packages
+
 from typing import  Tuple, Union
 
 import numpy as np
 import os
 from pkg_resources import resource_filename
 
+from pathlib import Path
+
+# DATADIR_2 = Path(__file__) / 'data'
+
 # __all__ = ['rotate', 'get_reference_traces_positions', 'get_trace_from_reference_transform']
 
 PWCPOS_CMD = 245.7600  # reference commanded position angle for the GR700XD
 
-DATADIR = resource_filename('pastasoss', 'data')
+# DATADIR = resource_filename('pastasoss', 'data')
+# DATADIR_3 = resource_filename(__name__, 'data')
 
 # order 3 currently unsupport ATM. Will be support in the future: TBD
 REFERENCE_TRACE_FILES = {
-    'order1':'pastasoss/data/jwst_niriss_gr700xd_order1_trace_refmodel.txt',
-    'order2':'pastasoss/data/jwst_niriss_gr700xd_order2_trace_refmodel.txt', 
+    'order1': resource_filename(__name__, 'data/jwst_niriss_gr700xd_order1_trace_refmodel.txt'),
+    'order2': resource_filename(__name__, 'data/jwst_niriss_gr700xd_order2_trace_refmodel.txt'),
 }
-
 
 def rotate(x: np.ndarray, y: np.ndarray, angle: float, origin: Tuple[float, float]=(0, 0), interp: bool=True) -> Tuple[np.ndarray, np.ndarray]:
     """
@@ -147,12 +153,10 @@ def get_trace_from_reference_transform(pwcpos: float, order: str='123', interp: 
         return [get_trace_from_reference_transform(pwcpos, odr) for odr in order]
     
     elif order == '1' :
-        trace_file = os.path.join(DATADIR, REFERENCE_TRACE_FILES['order1'])
-        x, y, origin = get_reference_traces_positions(trace_file)
+        x, y, origin = get_reference_traces_positions(REFERENCE_TRACE_FILES['order1'])
 
     elif order == '2':
-        trace_file = os.path.join(DATADIR, REFERENCE_TRACE_FILES['order2'])
-        x, y, origin = get_reference_traces_positions(trace_file)
+        x, y, origin = get_reference_traces_positions(REFERENCE_TRACE_FILES['order2'])
 
     elif order == '3':
         print('Order 3 is not yet supported as of yet. Will be supported in the future')
