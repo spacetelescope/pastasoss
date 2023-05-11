@@ -13,5 +13,5 @@ This tool is capable of predicting the spectral trace positions in a NIRISS SOSS
 
 As more and more JWST NIRISS/SOSS data becomes available we plan on updating the tool and reference data files. 
 
-Community feedback is encouraged! 
+Community feedback  and contribution is encouraged! 
 
