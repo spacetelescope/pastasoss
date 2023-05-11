@@ -1,48 +1,26 @@
-[project]
-name = "pastasoss"
-description = "Predicting Accurate Spectral Traces for Astrophysical SOSS Spectra"
-readme = "README.md"
-authors = [
-  { name = "Tyler Baines" },
-]
-keywords = ["astronomy", "python"]
-classifiers = ["Programming Language :: Python"]
-dependencies = [
-  "jupyter",
-  "matplotlib",
-  "numpy",
-  "numpydoc",
-]
-dynamic = ["version"]
-
-[project.optional-dependencies]
-test = [
-  "pytest",
-  "pytest-cov",
-  "pytest-mock",
-]  
-docs = [
-  "sphinx",
-  "sphinx_rtd_theme",
-  "stsci_rtd_theme",
-]
-
-[project.license]
-file = "LICENSE"
-content-type = "text/plain"
-
 [build-system]
-requires = ["setuptools>=61.2,<=65.5.0", "numpy", "wheel", "setuptools_scm"]
+requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "pastasoss"
+version = "0.1.0"
+authors = [
+    {name = "Tyler Baines", email = "tbaines@stsci.edu"},
+]
+description = "My package description"
+readme = "README.md"
+requires-python = ">=3.9"
+
+
 [tool.setuptools]
+# ...
+# By default, include-package-data is true in pyproject.toml, so you do
+# NOT have to specify this line.
+packages = ["pastasoss"]
 include-package-data = true
 
-[tool.setuptools.packages.find]
-namespaces = false
-where = ["pastasoss"]
 
-[tool.setuptools_scm]
 
-[tool.pytest]
-junit_family = "xunit2"
+
+
