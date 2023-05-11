@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Change log adopted from the transitspectroscopy package by Nestor Espinoza. 
 
-## [0.0] - 2023-05-03
+## [0.1.0] - 2023-05-03
 ### Added
-- Developers: Mees Fix and Tyler Baines 
+- Developers: Tyler Baines and Mees Fix
 - Basic setup and installation files. 
 - First version of package under revision and under going testing.
 - Updating code and updating data files in package. 
