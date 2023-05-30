@@ -4,7 +4,7 @@ Predicting Accurate Spectral Traces in Astrophysical SOSS Spectra
 
 By: Tyler Baines, STScI Science Support Analyst (NIRISS/SOSS Team) email: tbaines@stsci.edu
 
-A very short demo notebook is included with the package and we encourage users to checkout, can be found [here][https://github.com/tbainesUA/pastasoss/blob/develop/notebooks/pastasoss_demo.ipynb]. 
+A very short demo notebook is included with the package and we encourage users to checkout, can be found [here](https://github.com/tbainesUA/pastasoss/blob/develop/notebooks/pastasoss_demo.ipynb). 
 
 This tool is capable of predicting the spectral trace positions in a NIRISS SOSS observations with the GR700XD at given a pupil wheel position with sub-pixel accuracy. The tool currently supports spectral order 1 and 2, with future support for order 3. In addition, future updates will include both spectral traces poisition and their associated wavelengths. 
 
