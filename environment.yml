@@ -1,4 +1,4 @@
-name: pasta-soss-3.9
+name: pasta-soss-3.10
 channels:
   - conda-forge
   - defaults
