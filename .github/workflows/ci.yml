@@ -26,6 +26,6 @@ jobs:
       - uses: actions/checkout@v3
         id: python
 
-      - run: pip install -e .[test]
+      - run: pip install -e .
 
       - run: pytest pastasoss/tests/
