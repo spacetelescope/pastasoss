@@ -28,6 +28,4 @@ jobs:
 
       - run: pip install -e .[test]
 
-      - run: pip install pytest
-
       - run: pytest pastasoss/tests/
