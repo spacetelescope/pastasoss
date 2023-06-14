@@ -2,7 +2,6 @@
 name = "pastasoss"
 description = "My package description"
 readme = "README.md"
-version = "0.1.0"
 authors = [
     {name = "Tyler Baines", email = "tbaines@stsci.edu"},
 ]
