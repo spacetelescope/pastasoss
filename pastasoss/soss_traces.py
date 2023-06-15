@@ -5,6 +5,7 @@
 from typing import Tuple
 
 import numpy as np
+from scipy.interpolate import interp1d
 from pkg_resources import resource_filename
 
 PWCPOS_CMD = 245.7600  # Commanded PWCPOS for the GR700XD
@@ -65,8 +66,10 @@ def rotate(
 
     # interpolate rotated positions onto x-pixel column values (default)
     if interp:
-        y_new = np.interp(x, x_new, y_new)
-
+        # interpolate new coordinates onto original x values. 
+        y_new = interp1d(x_new, y_new, kind='linear', fill_value='extrapolate')(x)
+        return x, y_new
+    
     return x_new, y_new
 
 
