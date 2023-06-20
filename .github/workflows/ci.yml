@@ -4,14 +4,6 @@ on: [push, pull_request]
 
 jobs:
 
-  steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-      with:
-        python-version: "3.x"
-      id: python
-
-
   test:
     name: test (Python ${{ matrix.python-version }}, ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
@@ -21,6 +13,13 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         python-version: ['3.9', '3.10', '3.11']
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+        id: python
 
       - name: Install dependencies
         run: |
