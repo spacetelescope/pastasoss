@@ -1,40 +1,24 @@
 [project]
 name = "pastasoss"
-description = "Predicting Accurate Spectral Traces for Astrophysical SOSS Spectra"
+description = "My package description"
 readme = "README.md"
 authors = [
-  { name = "Tyler Baines" },
+    {name = "Tyler Baines", email = "tbaines@stsci.edu"},
 ]
-keywords = ["astronomy", "python"]
-classifiers = ["Programming Language :: Python"]
+requires-python = ">=3.9"
 dependencies = [
-  "numpy",
-  "numpydoc",
+    "jupyter>=1.0.0",
+    "numpy>=1.23.4",
+    "matplotlib>=3.6.2",
+    "pytest>=7.2.0",
 ]
+
 dynamic = ["version"]
 
-[project.optional-dependencies]
-test = [
-  "pytest",
-  "pytest-cov",
-  "pytest-mock",
-]  
-docs = [
-  "sphinx",
-  "sphinx_rtd_theme",
-  "stsci_rtd_theme",
-]
-
-[project.license]
-file = "LICENSE"
-content-type = "text/plain"
-
 [build-system]
-requires = ["setuptools>=61.2,<=65.5.0", "numpy", "wheel", "setuptools_scm"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools]
-include-package-data = true
+requires = ["setuptools >= 61.2",
+            "setuptools_scm[toml]>=7.1"]
+build-backend = 'setuptools.build_meta'
 
 [tool.setuptools.packages.find]
 namespaces = false
