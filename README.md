@@ -1,6 +1,6 @@
 # pastasoss
 
-Predicting Accurate Spectral Traces in Astrophysical SOSS Spectra
+Predicting Accurate Spectral Traces for Astrophysical SOSS Spectra
 
 By: Tyler Baines, STScI Science Support Analyst (NIRISS/SOSS Team) email: tbaines@stsci.edu
 
