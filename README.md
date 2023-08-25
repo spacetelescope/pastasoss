@@ -8,6 +8,11 @@ This tool is capable of predicting the spectral trace positions in a NIRISS SOSS
 
 As more and more JWST NIRISS/SOSS data becomes available we plan on updating the tool and reference data files. 
 
+Current trace position ranges for each spectral order:
+- order 1: x | [4, 2043]
+- order 2: x | [1000, 1750] (support to extended range to 650 will be available soon)
+- order 3: TBD
+
 (TBD)To install the package via pip:
 ```bash
 pip install pastasoss
