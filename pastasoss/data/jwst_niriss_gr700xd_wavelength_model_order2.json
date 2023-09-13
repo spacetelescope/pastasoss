@@ -1,0 +1,62 @@
+{
+    "date": "08/17/2023",
+    "train_data": "jwst_gr700xd_wavecal_order2_bd60d1753_train.csv",
+    "calib_target": "BD+60-1753",
+    "model": {
+        "info": "\n    Polynomial Regression model using sklearn package with a model containing\n    the following step: MinMaxScaling, PolyFeatures, LinearRegression. The \n    metadata regarding the fitted model is provided that summarizes the key aspects\n    ",
+        "poly_deg": 3,
+        "coef": [
+            -0.45676539565847996,
+            -0.00236286378313642,
+            0.0011682283468645671,
+            0.0006285629197698668,
+            0.002220358720576457,
+            0.016271932590956738,
+            -0.0003634158970305246,
+            -0.00019238549455892698,
+            -0.0015731681610239442
+        ],
+        "intercept": 1.0957902455177815,
+        "polyfeature_names": [
+            "x",
+            "offset",
+            "x^2",
+            "x offset",
+            "offset^2",
+            "x^3",
+            "x^2 offset",
+            "x offset^2",
+            "offset^3"
+        ],
+        "scaler": {
+            "feature_range": [
+                0,
+                1
+            ],
+            "feature_names_in_": [
+                "x",
+                "offset"
+            ],
+            "scale_": [
+                0.0010556466592589284,
+                3.8233422046046304
+            ],
+            "min_": [
+                -0.7095402177232991,
+                0.39591473197189986
+            ],
+            "data_min_": [
+                672.1379843340777,
+                -0.10355200000017817
+            ],
+            "data_max_": [
+                1619.4246462385518,
+                0.1579992675781341
+            ],
+            "data_range_": [
+                947.286661904474,
+                0.26155126757831226
+            ]
+        }
+    }
+}
