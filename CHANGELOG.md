@@ -14,3 +14,24 @@ Change log adopted from the transitspectroscopy package by Nestor Espinoza.
 - First version of package under revision and under going testing.
 - Updating code and updating data files in package. 
 
+## [1.0.0] - Package first released
+### Added
+- Developers: Tyler Baines and Mees Fix
+- Performed first release of the python package on github 
+- have few people test including myself passed
+- 
+
+# [1.1.0] - 2023-08-29
+### Added
+- Updating packing to include new wavelength calibration reference file that 
+are not apart of the JWST pipeline currently. 
+
+
+# [1.1.0] - 2023-09-08
+### Added
+- modified some of the archeitecture for return outputs of trace and wavelength
+predictions.
+- refactoring the package to be in a more maintable state is being
+planned but not implemented in this version (should be v1.1 now)
+- need to push changes to ST main repo thus tag up with Mees again. 
+
