@@ -2,10 +2,14 @@
 # given the  a pupil wheel position angle taken from the "PWCPOS" fits
 # header keyword.
 
+from dataclasses import dataclass
 from typing import Tuple
 
 import numpy as np
 from pkg_resources import resource_filename
+
+from pastasoss.wavecal import get_wavecal_meta_for_spectral_order
+from pastasoss.wavecal import get_wavelengths
 
 PWCPOS_CMD = 245.7600  # Commanded PWCPOS for the GR700XD
 
@@ -15,13 +19,32 @@ REFERENCE_TRACE_FILES = {
     # order 3 currently unsupport ATM. Will be support in the future: TBD
 }
 
+REFERENCE_WAVECAL_MODELS = {
+    "order1": resource_filename(
+        __name__, "data/jwst_niriss_gr700xd_wavelength_model_order1.json"
+    ),
+    "order2": resource_filename(
+        __name__, "data/jwst_niriss_gr700xd_wavelength_model_order2.json"
+    ),
+    # order 3 currently unsupport ATM. Will be support in the future: TBD
+}
+
+
+@dataclass
+class TraceModel:
+    order: str
+    x: np.ndarray
+    y: np.ndarray
+    wavelength: np.ndarray
+
 
 def rotate(
     x: np.ndarray,
     y: np.ndarray,
     angle: float,
     origin: Tuple[float, float] = (0, 0),
-    interp: bool = True) -> Tuple[np.ndarray, np.ndarray]:
+    interp: bool = True,
+) -> Tuple[np.ndarray, np.ndarray]:
     """
     Applies a rotation transformation to a set of 2D points.
 
@@ -66,11 +89,14 @@ def rotate(
     # interpolate rotated positions onto x-pixel column values (default)
     if interp:
         y_new = np.interp(x, x_new, y_new)
+        return x, y_new
 
     return x_new, y_new
 
 
-def get_reference_trace(file: str) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+def get_reference_trace(
+    file: str,
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
     Load in the reference trace positions given a file associated with a given
     spectral order.
@@ -98,7 +124,9 @@ def get_reference_trace(file: str) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     return x, y, origin
 
 
-def get_soss_traces(pwcpos: float, order: str = "123", interp: bool = True) -> Tuple[np.ndarray, np.ndarray]:
+def get_soss_traces(
+    pwcpos: float, order: str = "123", interp: bool = True
+) -> Tuple[np.ndarray, np.ndarray]:
     """
     This is the primary method for generate the gr700xd trace position given a
     pupil wheel positions angle provided in the FITS header under keyword
@@ -153,17 +181,25 @@ def get_soss_traces(pwcpos: float, order: str = "123", interp: bool = True) -> T
     # if 'order'+order in REFERENCE_TRACE_FILES.keys():
     #     ref_file = REFERENCE_TRACE_FILES["order"+order]
     elif order == "1":
-        ref_file = REFERENCE_TRACE_FILES["order1"]
+        ref_trace_file = REFERENCE_TRACE_FILES["order1"]
+        wave_cal_model_meta = get_wavecal_meta_for_spectral_order("order1")
 
     elif order == "2":
-        ref_file = REFERENCE_TRACE_FILES["order2"]
+        ref_trace_file = REFERENCE_TRACE_FILES["order2"]
+        wave_cal_model_meta = get_wavecal_meta_for_spectral_order("order2")
 
     elif order == "3":
         print("The software currently does not support order 3 at this time.")
         return None
 
-    x, y, origin = get_reference_trace(ref_file)
+    # reference trace data
+    x, y, origin = get_reference_trace(ref_trace_file)
 
+    # rotated reference trace
     x_new, y_new = rotate(x, y, pwcpos - PWCPOS_CMD, origin, interp=interp)
 
-    return x_new, y_new
+    # wavelength associated to trace at given pwcpos value
+    wavelengths = get_wavelengths(x, pwcpos, wave_cal_model_meta)
+
+    # return x_new, y_new, wavelengths
+    return TraceModel(order, x_new, y_new, wavelengths)
