@@ -13,6 +13,8 @@ Current trace position ranges for each spectral order:
 - order 2: x | [1000, 1750] (support to extended range to 650 will be available soon)
 - order 3: TBD
 
+The wavelength calibration model supports full range of order 1 while order 2 supports from pixel column 650 to 1750. 
+
 (TBD)To install the package via pip:
 ```bash
 pip install pastasoss
