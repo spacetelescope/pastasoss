@@ -27,16 +27,41 @@ REFERENCE_WAVECAL_MODELS = {
 }
 
 
+# dataclass object to store the metadata from a wavecal model
 @dataclass
 class NIRISS_GR700XD_WAVECAL_META:
+    """
+    Datamodel object container for the wavecal meta data in the json reference
+    file.
+    """
     order: str
     coefficients: npt.NDArray[np.float64]
     intercept: npt.NDArray[np.float64]
     scaler_data_min_: float
     scaler_data_max_: float
+    poly_degree: int
 
 
 def load_wavecal_model(filename: str) -> Dict[str, Any]:
+    """
+    Load a wavecalibration model from a JSON file.
+
+    Parameters
+    ----------
+    filename : str
+        The path to the JSON file containing the wavecalibration model.
+
+    Returns
+    -------
+    dict
+        A dictionary representing the loaded wavecalibration model.
+
+    Notes
+    -----
+    This function reads the specified JSON file and returns its contents as a
+    dictionary, which typically contains information about a wavecalibration
+    model used in data analysis.
+    """
     with open(filename, "r") as file:
         wavecal_model = json.load(file)
     return wavecal_model
@@ -45,17 +70,48 @@ def load_wavecal_model(filename: str) -> Dict[str, Any]:
 def get_wavecal_meta_for_spectral_order(
     order: str,
 ) -> NIRISS_GR700XD_WAVECAL_META:
+    """
+    Retrieve wavecalibration model metadata for a specific spectral order.
+
+    Parameters
+    ----------
+    order : str
+        The spectral order for which wavecalibration metadata is requested.
+        Valid options are 'order 1', 'order 2', or 'order 3'.
+
+    Returns
+    -------
+    NIRISS_GR700XD_WAVECAL_META
+        An object containing wavecalibration metadata, including order, model
+        coefficients, intercept, and scaler data bounds.
+
+    Raises
+    ------
+    ValueError
+        If the provided 'order' is not one of the valid options.
+
+    Notes
+    -----
+    This function retrieves wavecalibration metadata for the specified spectral
+    order. It first checks if the 'order' is valid and then loads the 
+    corresponding wavecalibration model. The model's coefficients, intercept, 
+    and scaler data bounds are extracted and returned as part of the metadata
+    object.
+    """
     # get the reference wavecal file name
     if order not in REFERENCE_WAVECAL_MODELS:
         raise ValueError(
             "{order} is not a valid input: use either 'order 1', 'order 2', or 'order 3'."
         )
 
+    # get the appropiate reference file name given the order
     reference_filename = REFERENCE_WAVECAL_MODELS[order]
 
+    # load in the model
     wavecal_model = load_wavecal_model(reference_filename)
 
     # model coefficients
+    poly_degree = wavecal_model["model"]["poly_deg"]
     coefficients = wavecal_model["model"]["coef"]
     intercept = wavecal_model["model"]["intercept"]
 
@@ -64,7 +120,8 @@ def get_wavecal_meta_for_spectral_order(
     scaler_data_max_ = wavecal_model["model"]["scaler"]["data_max_"]
 
     return NIRISS_GR700XD_WAVECAL_META(
-        order, coefficients, intercept, scaler_data_min_, scaler_data_max_
+        order, coefficients, intercept, scaler_data_min_, scaler_data_max_,
+        poly_degree
     )
 
 
@@ -86,6 +143,31 @@ def get_wavelengths(
 
 
 def min_max_scaler(x, x_min, x_max):
+    """
+    Apply min-max scaling to input values.
+
+    Parameters
+    ----------
+    x : float or numpy.ndarray
+        The input value(s) to be scaled.
+    x_min : float
+        The minimum value in the range to which 'x' will be scaled.
+    x_max : float
+        The maximum value in the range to which 'x' will be scaled.
+
+    Returns
+    -------
+    float or numpy.ndarray
+        The scaled value(s) in the range [0, 1].
+
+    Notes
+    -----
+    Min-max scaling is a data normalization technique that scales input values
+    'x' to the range [0, 1] based on the provided minimum and maximum values,
+    'x_min' and 'x_max'. This function is applicable to both individual values
+    and arrays of values. This function will use the min/max values from the
+    training data of the wavecal model.
+    """
     # scaling the input x values
     x_scaled = (x - x_min) / (x_max - x_min)
     return x_scaled
@@ -112,7 +194,7 @@ def wavecal_model_order1_poly(
     )
 
     def get_poly_features(x: np.array, offset: np.array) -> np.ndarray:
-        # polynomial features
+        """polynomial features for the order 1 wavecal model"""
         poly_features = np.array(
             [
                 x,
@@ -160,7 +242,7 @@ def wavecal_model_order1_poly(
 def wavecal_model_order2_poly(
     x, pwcpos, wavecal_meta: NIRISS_GR700XD_WAVECAL_META
 ):
-    """compute order 1 wavelengths"""
+    """compute order 2 wavelengths"""
     x_scaler = partial(
         min_max_scaler,
         **{
@@ -178,8 +260,7 @@ def wavecal_model_order2_poly(
     )
 
     def get_poly_features(x: np.array, offset: np.array) -> np.ndarray:
-        # polynomial features
-        # polynomial features
+        """Polynomial features for the order 2 wavecal model"""
         poly_features = np.array([
             x, offset, x**2, x * offset,
             offset**2, x**3,  x**2 * offset,
@@ -187,6 +268,7 @@ def wavecal_model_order2_poly(
         ])
         return poly_features
 
+    # coef and intercept
     coef = wavecal_meta.coefficients
     intercept = wavecal_meta.intercept
 
