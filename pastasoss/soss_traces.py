@@ -180,6 +180,7 @@ def get_soss_traces(
     # This might be an alternative way of writing this
     # if 'order'+order in REFERENCE_TRACE_FILES.keys():
     #     ref_file = REFERENCE_TRACE_FILES["order"+order]
+    # This section can definite be refactored in a later version
     elif order == "1":
         ref_trace_file = REFERENCE_TRACE_FILES["order1"]
         wave_cal_model_meta = get_wavecal_meta_for_spectral_order("order1")
