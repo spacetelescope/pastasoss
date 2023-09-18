@@ -33,9 +33,9 @@ def test_load_wavecal_model_order1():
     PWCPOS_OFFSET_MAX_SCALER = 0.1628820800781341
 
     # load order 1 wavecal model
-    order1_metadata = get_wavecal_meta_for_spectral_order('order 1')
+    order1_metadata = get_wavecal_meta_for_spectral_order('order1')
 
-    assert order1_metadata.order == 'order 1'
+    assert order1_metadata.order == 'order1'
     assert len(order1_metadata.coefficients) == NCOEF
     assert order1_metadata.poly_degree == POLY_DEGREE
     assert order1_metadata.intercept == INTERCEPT
@@ -63,9 +63,9 @@ def test_load_wavecal_model_order2():
     PWCPOS_OFFSET_MAX_SCALER = 0.1579992675781341
 
     # load order 1 wavecal model
-    order2_metadata = get_wavecal_meta_for_spectral_order('order 2')
+    order2_metadata = get_wavecal_meta_for_spectral_order('order2')
 
-    assert order2_metadata.order == 'order 2'
+    assert order2_metadata.order == 'order2'
     assert len(order2_metadata.coefficients) == NCOEF
     assert order2_metadata.poly_degree == POLY_DEGREE
     assert order2_metadata.intercept == INTERCEPT
@@ -103,3 +103,11 @@ def test_load_order2_trace_model():
 
     assert origin == (1677, 200)
     assert x_limits == (1000, 1750)
+
+
+# if __name__ == '__main__':
+#     test_rotate()
+#     test_load_order1_trace_model()
+#     test_load_order2_trace_model()
+#     test_load_wavecal_model_order1()
+#     test_load_wavecal_model_order2()
