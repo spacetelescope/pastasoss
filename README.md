@@ -1,8 +1,7 @@
-# PASTASOSS
-
-**Predicting Accurate Spectral Traces in Astrophysical SOSS Spectra**
+## **Predicting Accurate Spectral Traces in Astrophysical SOSS Spectra** (PASTASOSS)
 
 **Author**: Tyler Baines, NIRISS/SOSS STScI Science Support Analyst 
+
 **Email**: tbaines@stsci.edu
 
 ----
@@ -38,8 +37,6 @@ pip install pastasoss
 Altneratively, you can clone the repository and navigate to directory:
 
 ```bash
-git clone https://github.com/tbainesUA/pastasoss.git
-cd pastasoss
 pip install .
 ```
 
@@ -68,7 +65,7 @@ A concise demonstration [notebook](https://github.com/tbainesUA/pastasoss/blob/d
 ## Get Involved
 
 We welcome community feedback to improve and expand PASTASOSS. 
-Community feedback  and contribution is encouraged! Please reach out to the author.
+Community feedback  and contribution is encouraged! 
 
 ## Resources
 TBD
