@@ -38,6 +38,8 @@ pip install pastasoss
 Altneratively, you can clone the repository and navigate to directory:
 
 ```bash
+git clone https://github.com/tbainesUA/pastasoss.git
+cd pastasoss
 pip install .
 ```
 
