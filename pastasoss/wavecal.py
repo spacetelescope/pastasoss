@@ -93,15 +93,15 @@ def get_wavecal_meta_for_spectral_order(
     Notes
     -----
     This function retrieves wavecalibration metadata for the specified spectral
-    order. It first checks if the 'order' is valid and then loads the 
-    corresponding wavecalibration model. The model's coefficients, intercept, 
+    order. It first checks if the 'order' is valid and then loads the
+    corresponding wavecalibration model. The model's coefficients, intercept,
     and scaler data bounds are extracted and returned as part of the metadata
     object.
     """
     # get the reference wavecal file name
     if order not in REFERENCE_WAVECAL_MODELS:
         raise ValueError(
-            "{order} is not a valid input: use either 'order 1', 'order 2', or 'order 3'."
+            f"valid orders are: {REFERENCE_WAVECAL_MODELS.keys()}."
         )
 
     # get the appropiate reference file name given the order
