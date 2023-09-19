@@ -68,7 +68,7 @@ A concise demonstration [notebook](https://github.com/tbainesUA/pastasoss/blob/d
 ## Get Involved
 
 We welcome community feedback to improve and expand PASTASOSS. 
-Community feedback  and contribution is encouraged! 
+Community feedback  and contribution is encouraged! Please reach out to the author.
 
 ## Resources
 TBD
