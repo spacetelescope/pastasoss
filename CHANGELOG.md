@@ -35,3 +35,9 @@ predictions.
 planned but not implemented in this version (should be v1.1 now)
 - need to push changes to ST main repo thus tag up with Mees again. 
 
+# [1.1.0] - 2023-09-20
+### Added
+- updated demo notebook to include having to download a soss dataset from PID 1512
+- finished integration of wavecal model and tested extensively in my dev branch
+- updated the order 2 reference trace model which now extend from 600 to 1750
+- readme has been update with some changes
