@@ -1,7 +1,9 @@
 ## **Predicting Accurate Spectral Traces in Astrophysical SOSS Spectra** (PASTASOSS)
 
 **Author**: Tyler Baines
+
 **Affiliation**: Science Support Analyst, NIRISS/SOSS Team, Space Telescope Science Institute (STScI)
+
 **Email**: tbaines@stsci.edu
 
 ----
