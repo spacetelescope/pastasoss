@@ -8,23 +8,23 @@
 
 ## Overview
 
-PASTASOSS is a powerful tool designed to predict the position and associated wavelength wavelength values of the GR700XD spectral traces in NIRISS/SOSS observations with the GR700XD with sub-pixel accuracy. It currently supports spectral orders 1 and 2, with plans for future support for order 3. Order 1 and 2 trace position models are provided along with their respective wavelength solutions. It is important to note that the reference files included in this package are not apart of the offical JWST reference files system at this time. 
+When JWST operates in the NIRISS/SOSS mode, the rotation of the pupil wheel, responsible for positioning the GR700XD grism into the optical path, does not consistently align with its expected position (i.e., there is a slight rotational offset). This variability, with shifts of just a few fractions of a degree from the commanded position, leads to noticeable changes in the positions of spectral traces (with the greatest changes observed at redder wavelength) for NIRISS/SOSS observations from one visit to another. These variations can result in differences in the wavelength solutions between visits, potentially impacting data accuracy. 
+
+To address these challenges and ensure accurate data analysis and spectral extraction, we introduce **PASTASOSS**, a robust tool to designed to predict the positions and associated wavelength values of the GR700XD spectral traces with sub-pixel precision. Currently, the tools supports spectral orders 1 and 2, with plans to extend support to order 3 in the future. PASTASOSS provides trace position models for both Order 1 and Order 2, which accurately represent the positions when the GR700XD is located in its commanded positions. Additionally, it offers a global wavelength solution based on the pupil wheel position, ensuring precise spectral calibration. It's worth noting that the reference files included in this package are not apart of the official JWST reference files system at this time. However, they serve as essential resources for achieving precise spectral trace predictions in the face of instrument variatation. 
 
 As more NIRISS/SOSS observations become increasingly available, we are commited to continually updating the tool and reference data models to ensure its accuracy and relevance. 
 
-Please be aware that the spectral trace positions provided are based on the `SUBSTRIP256` subarray configuration. We have not conducted accuracy tests using the `SUBSTRIP96` subarray or analyzed/compared trace positions with the `F277W` filter.
+* *Note: Please be aware that the spectral trace positions provided are based on the `SUBSTRIP256` subarray configuration. We have not conducted accuracy tests using the `SUBSTRIP96` subarray or analyzed/compared trace positions with the `F277W` filter. While we believe that the tool should function adequately with these configurations, we advise users to proceed with caution and use them at their own discretion, as thorough testing has not yet been completed.* 
 
-## Spectral Trace Position Ranges
+## Supported Spectral Trace Ranges
 
-For each spectral order, the **current position ranges** of the spectral traces are defined as:
+| Spectral Order | Trace Position Model (Pixels)  | Wavelength Solution Model ($\mu m$)| PWCPOS (deg)      | 
+| :------------- | :----------------------------: | :--------------------------------: | :----------:      |
+| Order 1        | [4, 2043]                      | [0.85, 2.83]                       | [245.656, 245.923]|
+| Order 2*       | [1000, 1750]                   | [0.6, 0.94]                        | [245.656, 245.918]|
+| Order 3        | Unsupported                    | Unsupported                        | Unsupported       |
 
-- **Order 1:** The spectral trace positions ('x') range from pixel column 4 to 2043.
-- **Order 2:** The spectral trace positions ('x') span from pixel column 1000 to 1750, with upcoming support for an extended range down to pixel column 650.
-- **Order 3:** TBD.
-
-Additionally, it's important to note that the **wavelength calibration model** for **Order 1** has full coverage while **Order 2** has partial coverage. 
-
-The GR700XD pupil wheel tolerance is 245.76 $\pm$ 0.1651 degrees.
+\* Extended range of trace model to support [650, 1750] for Order 2 is coming soon.
 
 ## Installation
 
@@ -44,7 +44,7 @@ pip install .
 
 To use the package:
 
-```bash
+```python
 import pastasoss
 
 # predict gr700xd traces position for order 1
