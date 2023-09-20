@@ -23,10 +23,8 @@ As more NIRISS/SOSS observations become increasingly available, we are commited 
 | Spectral Order | Trace Position Model (Pixels)  | Wavelength Solution Model ($\mu m$)| PWCPOS (deg)      | 
 | :------------- | :----------------------------: | :--------------------------------: | :----------:      |
 | Order 1        | [4, 2043]                      | [0.85, 2.83]                       | [245.656, 245.923]|
-| Order 2*       | [1000, 1750]                   | [0.6, 0.94]                        | [245.656, 245.918]|
+| Order 2       | [600, 1750]                    | [0.60, 1.30]                       | [245.656, 245.918]|
 | Order 3        | Unsupported                    | Unsupported                        | Unsupported       |
-
-\* Extended range of trace model to support [650, 1750] for Order 2 is coming soon.
 
 ## Installation
 
