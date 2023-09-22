@@ -16,8 +16,6 @@ from pkg_resources import resource_filename
 PWCPOS_CMD = 245.76
 
 # TODO: order 3 currently unsupport ATM. Will be support in the future: TBD
-#       and if this comment was longer here is how you would indent multiple lines
-#       of comments for a todo.
 REFERENCE_WAVECAL_MODELS = {
     "order1": resource_filename(
         __name__, "data/jwst_niriss_gr700xd_wavelength_model_order1.json"
