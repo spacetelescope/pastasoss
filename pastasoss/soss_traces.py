@@ -14,10 +14,11 @@ from pastasoss.wavecal import get_wavelengths
 
 PWCPOS_CMD = 245.7600  # Commanded PWCPOS for the GR700XD
 
+
+# TODO: order 3 currently unsupport ATM. Will be support in the future: TBD
 REFERENCE_TRACE_FILES = {
     "order1": "jwst_niriss_gr700xd_order1_trace_refmodel.txt",
     "order2": "jwst_niriss_gr700xd_order2_trace_refmodel.txt",
-    # order 3 currently unsupport ATM. Will be support in the future: TBD
 }
 
 REFERENCE_WAVECAL_MODELS = {
@@ -27,7 +28,6 @@ REFERENCE_WAVECAL_MODELS = {
     "order2": resource_filename(
         __name__, "data/jwst_niriss_gr700xd_wavelength_model_order2.json"
     ),
-    # order 3 currently unsupport ATM. Will be support in the future: TBD
 }
 
 
