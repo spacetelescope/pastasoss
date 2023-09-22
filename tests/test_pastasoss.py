@@ -104,10 +104,3 @@ def test_load_order2_trace_model():
     assert origin == (1677, 200)
     assert x_limits == (1000, 1750)
 
-
-# if __name__ == '__main__':
-#     test_rotate()
-#     test_load_order1_trace_model()
-#     test_load_order2_trace_model()
-#     test_load_wavecal_model_order1()
-#     test_load_wavecal_model_order2()
