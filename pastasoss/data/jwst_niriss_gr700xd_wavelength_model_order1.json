@@ -1,0 +1,84 @@
+{
+    "date": "08/17/2023",
+    "train_data": "jwst_gr700xd_wavecal_order1_bd60d1753_train.csv",
+    "calib_target": "BD+60-1753",
+    "model": {
+        "info": "\n    Polynomial Regression model using sklearn package with a model containing\n    the following step: MinMaxScaling, PolyFeatures, LinearRegression. The \n    metadata regarding the fitted model is provided that summarizes the key aspects\n    ",
+        "poly_deg": 5,
+            "coef": [
+                -1.9462425267979186,
+                -0.0016999092570037996,
+                -0.04235166350050612,
+                0.0035994652274160157,
+                -0.01757299625962458,
+                0.23236466876596615,
+                -0.007105598519500294,
+                0.0025264564987347647,
+                0.056400897335509986,
+                -0.36002130099457746,
+                0.011875022462157658,
+                -0.0032811880126190403,
+                -0.01236246986642536,
+                -0.06343061874796818,
+                0.2097066692071121,
+                -0.008561238616821646,
+                0.006266875748194782,
+                -0.0023358534990428376,
+                0.009740950824042485,
+                0.023152089892448217
+            ],
+        "intercept": 2.761308747854264,
+        "polyfeature_names": [
+            "x",
+            "offset",
+            "x^2",
+            "x offset",
+            "offset^2",
+            "x^3",
+            "x^2 offset",
+            "x offset^2",
+            "offset^3",
+            "x^4",
+            "x^3 offset",
+            "x^2 offset^2",
+            "x offset^3",
+            "offset^4",
+            "x^5",
+            "x^4 offset",
+            "x^3 offset^2",
+            "x^2 offset^3",
+            "x offset^4",
+            "offset^5"
+        ],
+        "scaler": {
+            "feature_range": [
+                0,
+                1
+            ],
+            "feature_names_in_": [
+                "x",
+                "offset"
+            ],
+            "scale_": [
+                0.0005086177470154923,
+                3.7532736041353
+            ],
+            "min_": [
+                -0.03744898085599826,
+                0.388658988256087
+            ],
+            "data_min_": [
+                73.62893071613087,
+                -0.1035520000001781
+            ],
+            "data_max_": [
+                2039.7420006352984,
+                0.1628820800781341
+            ],
+            "data_range_": [
+                1966.1130699191676,
+                0.2664340800783122
+            ]
+        }
+    }
+}
