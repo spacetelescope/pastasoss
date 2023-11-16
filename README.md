@@ -34,9 +34,11 @@ To install the package via pip, use the following command:
 pip install pastasoss
 ```
 
-Altneratively, you can clone the repository and navigate to directory:
+Alternatively, you can clone the repository and navigate to directory:
 
 ```bash
+https://github.com/spacetelescope/pastasoss.git
+cd pastasoss
 pip install .
 ```
 
@@ -68,4 +70,7 @@ We welcome community feedback to improve and expand PASTASOSS.
 Community feedback  and contribution is encouraged! 
 
 
-If you make use of this code, please cite: TBD
+If you make use of this code, please cite the two JWST technical reports:
+
+- Characterization of the visit-to-visit Stability of the GR700XD Spectral Traces for NIRISS/SOSS Observations: https://arxiv.org/abs/2311.07769
+- Characterization of the visit-to-visit Stability of the GR700XD Wavelength Calibration for NIRISS/SOSS Observations: https://arxiv.org/abs/2311.07771
