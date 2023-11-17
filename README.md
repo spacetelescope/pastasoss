@@ -37,7 +37,7 @@ pip install pastasoss
 Alternatively, you can clone the repository and navigate to directory:
 
 ```bash
-https://github.com/spacetelescope/pastasoss.git
+git clone https://github.com/spacetelescope/pastasoss.git
 cd pastasoss
 pip install .
 ```
