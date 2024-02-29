@@ -15,8 +15,7 @@ docs/source/api/
 htmlcov/
 *.sqlite3
 *.ipynb_checkpoints
-tests/
-git 
+git
 pastasoss/pastasoss.py
 *_v3*.yml 
 misc/*
@@ -26,3 +25,7 @@ pastasoss/data/*.pkl
 notebooks/test_*.ipynb
 .vscode/
 *.yml
+
+
+!/pastasoss/data/jwst_niriss_spectrace_template.fits
+!/pastasoss/data/jwst_niriss_wavemap_template.fits
