@@ -1,6 +1,15 @@
+import os
+from pkg_resources import resource_filename
+
 from pastasoss.soss_traces import rotate
 from pastasoss.soss_traces import get_reference_trace
 from pastasoss.soss_traces import REFERENCE_TRACE_FILES
+
+from pastasoss.soss_wavemaps import extrapolate_to_wavegrid
+from pastasoss.soss_wavemaps import calc_2d_wave_map
+from pastasoss.soss_wavemaps import get_soss_wavemaps
+
+from pastasoss.pipeline import write_soss_reffiles
 
 from pastasoss.wavecal import get_wavecal_meta_for_spectral_order
 
@@ -104,3 +113,45 @@ def test_load_order2_trace_model():
     assert origin == (1677, 200)
     assert x_limits == (1000, 1750)
 
+
+def test_get_soss_wavemaps():
+
+    # Get wavemap of commanded PWCPOS
+    cmd_wavemaps = get_soss_wavemaps()
+
+    # Get wavemaps of different PWCPOS
+    pwcpos = 245.8
+    rot_wavemaps = get_soss_wavemaps(pwcpos)
+
+    # Get spectrace values as well
+    tra_wavemaps, tra_spectraces = get_soss_wavemaps(pwcpos, padding=True, spectraces=True)
+
+    assert cmd_wavemaps.shape == (2, 256, 2048)
+    assert tra_wavemaps.shape == (2, 296, 2088)
+    assert tra_spectraces.shape == (2, 2, 5002)
+    assert not np.all(cmd_wavemaps == rot_wavemaps)
+
+
+def test_write_soss_reffiles():
+
+    # Make the files
+    pwcpos = 245.9
+    wavemap_file = 'test_wavemap.fits'
+    spectrace_file = 'spectrace_test.fits'
+    write_soss_reffiles(pwcpos, wavemap_file, spectrace_file)
+
+    # Compare template and new spectrace data to make sure things changed
+    spectrace_template = resource_filename('pastasoss', 'pastasoss/data/jwst_niriss_spectrace_template.fits')
+    spectrace_template_data = fits.getdata(spectrace_template)
+    spectrace_new_data = fits.getdata(spectrace_file)
+    assert not np.all(spectrace_new_data.Y == spectrace_template_data.Y)
+
+    # Compare template and new wavemap data to make sure things changed
+    wavemap_template = resource_filename('pastasoss', 'pastasoss/data/jwst_niriss_spectrace_template.fits')
+    wavemap_template_data = fits.getdata(wavemap_template)
+    wavemap_new_data = fits.getdata(wavemap_file)
+    assert not np.all(wavemap_new_data == wavemap_template_data)
+
+    # Delete tmp files
+    os.remove(wavemap_file)
+    os.remove(spectrace_file)

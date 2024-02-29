@@ -15,8 +15,7 @@ docs/source/api/
 htmlcov/
 *.sqlite3
 *.ipynb_checkpoints
-tests/
-git 
+git
 pastasoss/pastasoss.py
 *_v3*.yml 
 misc/*

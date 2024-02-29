@@ -31,4 +31,4 @@ jobs:
         run: pip install .
 
       - name: Test package
-        run: pytest pastasoss/tests/
+        run: pytest tests/
