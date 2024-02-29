@@ -10,6 +10,7 @@ pastasoss.write_soss_reffiles(pwcpos, 'my_new_wavemap.fits', 'my_new_spectrace.f
 """
 
 import shutil
+from pkg_resources import resource_filename
 
 from astropy.io import fits
 
@@ -29,6 +30,10 @@ def write_soss_reffiles(pwcpos, wavemap_filepath, spectrace_filepath):
     template : str
         The reference file to use as a template
     """
+    # Get the template reference files
+    spectrace_template = resource_filename('pastasoss', 'pastasoss/data/jwst_niriss_spectrace_template.fits')
+    wavemap_template = resource_filename('pastasoss', 'pastasoss/data/jwst_niriss_wavemap_template.fits')
+
     # Generate the padded wavemap
     wavemaps, spectraces = get_soss_wavemaps(pwcpos, padding=True, spectraces=True)
 
