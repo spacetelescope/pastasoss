@@ -16,7 +16,7 @@ PWCPOS_CMD = 245.7600  # Commanded PWCPOS for the GR700XD
 
 REFERENCE_TRACE_FILES = {
     "order1": "jwst_niriss_gr700xd_order1_trace_refmodel.txt",
-    "order2": "jwst_niriss_gr700xd_order2_trace_refmodel.txt",
+    "order2": "jwst_niriss_gr700xd_order2_trace_refmodel_002.txt",
     # order 3 currently unsupport ATM. Will be support in the future: TBD
 }
 
@@ -25,7 +25,7 @@ REFERENCE_WAVECAL_MODELS = {
         __name__, "data/jwst_niriss_gr700xd_wavelength_model_order1.json"
     ),
     "order2": resource_filename(
-        __name__, "data/jwst_niriss_gr700xd_wavelength_model_order2.json"
+        __name__, "data/jwst_niriss_gr700xd_wavelength_model_order2_002.json"
     ),
     # order 3 currently unsupport ATM. Will be support in the future: TBD
 }
@@ -89,10 +89,14 @@ def rotate(
 
     # interpolate rotated positions onto x-pixel column values (default)
     if interp:
-        # interpolate new coordinates onto original x values. 
-        y_new = interp1d(x_new, y_new, kind='linear', fill_value='extrapolate')(x)
+        # interpolate new coordinates onto original x values and mask values
+        # outside of the domain of the image 0<=x<=2047 and 0<=y<=255.
+        y_new = interp1d(x_new, y_new, kind="linear", fill_value="extrapolate")(x)
+        mask = y_new <= 255
+        x = x[mask]
+        y_new = y_new[mask]
         return x, y_new
-    
+
     return x_new, y_new
 
 
@@ -202,7 +206,7 @@ def get_soss_traces(
     x_new, y_new = rotate(x, y, pwcpos - PWCPOS_CMD, origin, interp=interp)
 
     # wavelength associated to trace at given pwcpos value
-    wavelengths = get_wavelengths(x, pwcpos, wave_cal_model_meta)
+    wavelengths = get_wavelengths(x_new, pwcpos, wave_cal_model_meta)
 
     # return x_new, y_new, wavelengths
     return TraceModel(order, x_new, y_new, wavelengths)
