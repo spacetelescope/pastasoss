@@ -34,9 +34,11 @@ To install the package via pip, use the following command:
 pip install pastasoss
 ```
 
-Altneratively, you can clone the repository and navigate to directory:
+Alternatively, you can clone the repository and navigate to directory:
 
 ```bash
+git clone https://github.com/spacetelescope/pastasoss.git
+cd pastasoss
 pip install .
 ```
 

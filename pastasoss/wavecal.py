@@ -15,7 +15,7 @@ from pkg_resources import resource_filename
 # explicitly defining the commanded position here as well (this is temp)
 PWCPOS_CMD = 245.76
 
-# reference wavecal models pkg filepaths
+# TODO: order 3 currently unsupport ATM. Will be support in the future: TBD
 REFERENCE_WAVECAL_MODELS = {
     "order1": resource_filename(
         __name__, "data/jwst_niriss_gr700xd_wavelength_model_order1.json"
@@ -23,7 +23,6 @@ REFERENCE_WAVECAL_MODELS = {
     "order2": resource_filename(
         __name__, "data/jwst_niriss_gr700xd_wavelength_model_order2.json"
     ),
-    # order 3 currently unsupport ATM. Will be support in the future: TBD
 }
 
 
