@@ -92,8 +92,8 @@ def rotate(
     if interp:
         # interpolate new coordinates onto original x values and mask values
         # outside of the domain of the image 0<=x<=2047 and 0<=y<=255.
-        y_new = interp1d(x_new, y_new, kind="linear", fill_value="extrapolate")(x)
-        mask = y_new <= 255
+        y_new = interp1d(x_new, y_new, fill_value="extrapolate")(x)
+        mask = np.where(y_new <= 255.0)
         x = x[mask]
         y_new = y_new[mask]
         return x, y_new
