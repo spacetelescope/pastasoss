@@ -277,7 +277,9 @@ def wavecal_model_order2_poly(x, pwcpos, wavecal_meta: NIRISS_GR700XD_WAVECAL_ME
     x_scaled = x_scaler(x)
 
     # offset
-    offset = np.ones_like(x) * (pwcpos - PWCPOS_CMD)
+    # offset = np.ones_like(x) * (pwcpos - PWCPOS_CMD)
+    # this will need to get changed later...
+    offset = np.ones_like(x) * pwcpos
     offset_scaled = pwcpos_offset_scaler(offset)
 
     # polynomial features
