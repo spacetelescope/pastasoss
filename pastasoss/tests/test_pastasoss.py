@@ -103,11 +103,14 @@ def test_rotate():
     """Test rotate step to ensure that x coordinate input is return in the
     output when interpolating back onto the pixel column grid."""
 
+    # using trace model for rotation step
     ref_trace_file = REFERENCE_TRACE_FILES["order1"]
     x, y, origin = get_reference_trace(ref_trace_file)
+
+    # rotate
     angle = 0.2
     x_coords, y_coords = rotate(x, y, angle, origin, interp=True)
-
+    # checks
     assert len(x) == len(x_coords)
     assert len(y) == len(y_coords)
-    assert x_coords == x
+    assert np.array_equal(x, x_coords)
