@@ -1,0 +1,66 @@
+{
+    "date": "03/29/2024",
+    "train_data": "jwst_gr700xd_wavecal_order2_bd60d1753_train_results_20240329.csv",
+    "calib_target": "BD+60-1753",
+    "model": {
+        "info": "\n    Polynomial Regression model using sklearn package with a model containing\n    the following step: PolyFeatures, LinearRegression. MinMaxScaling was removed \n    in this version where the data was normalized to be with the allowed domain of \n    the problem. Such that the data was normalized between 0 and 1 given that \n                X: [0,2048] pixel and \n                PWCPOS: [PWCPOS_CMD-PWCPOS_STD, PWCPOS_CMD+PWCPOS_STD] deg \n    The metadata regarding the fitted model is provided that summarizes the key aspects \n    needed for pastasoss. A few of meta data feaures have been replace to None as they\n    are not releveant with this setup.\n    \n    Model performance measured RMS:  0.829 \u00b1 0.326 [pixel]\n    \n    (Note) These models be deprecated in future versions as improvements are made as well as \n    how the models are stored and loaded for use in pastasoss.\n    ",
+        "poly_deg": 3,
+        "coef": [
+            -0.9676328152475233,
+            -0.0008683710244127037,
+            -0.09104584193242297,
+            -0.005333758440568975,
+            0.0011066308336508438,
+            0.11983376351286051,
+            0.008483099711289799,
+            -0.003190668112438242,
+            8.235350667391732e-05
+        ],
+        "intercept": 1.418562550851081,
+        "polyfeature_names": [
+            "x_norm",
+            "pwcpos_norm",
+            "x_norm^2",
+            "x_norm pwcpos_norm",
+            "pwcpos_norm^2",
+            "x_norm^3",
+            "x_norm^2 pwcpos_norm",
+            "x_norm pwcpos_norm^2",
+            "pwcpos_norm^3"
+        ],
+        "scaler": {
+            "feature_range": [
+                0,
+                1
+            ],
+            "feature_names_in_": [
+                "x_norm",
+                "pwcpos_norm"
+            ],
+            "scale_": [
+                null,
+                null
+            ],
+            "min_": [
+                null,
+                null
+            ],
+            "data_min_": [
+                0.0,
+                245.5929
+            ],
+            "data_max_": [
+                2048.0,
+                245.9271
+            ],
+            "data_range_": [
+                null,
+                null
+            ],
+            "data_units_": [
+                "pixel",
+                "degree"
+            ]
+        }
+    }
+}

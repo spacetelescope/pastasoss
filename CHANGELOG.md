@@ -41,3 +41,16 @@ planned but not implemented in this version (should be v1.1 now)
 - finished integration of wavecal model and tested extensively in my dev branch
 - updated the order 2 reference trace model which now extend from 600 to 1750
 - readme has been update with some changes
+
+# [1.2.0] - 2024-04-02
+### Added
+- Update order 2 trace model and wavelength solution to provide full support
+  - jwst_niriss_gr700xd_order2_trace_refmodel_002.txt
+  - jwst_niriss_gr700xd_wavelength_model_order2_002.json
+- updated demo notebook showcasing order 2 completeness
+- update readme to reflect additions/changes
+- removing support for python 3.9 upon Astropy being deprecating Python 3.9 
+so 3.10 will now be the the minimum version.
+- also making additional to changes to some test and removing the duplicate
+test folder that was present. 
+- 
