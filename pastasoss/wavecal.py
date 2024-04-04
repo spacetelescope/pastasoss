@@ -21,7 +21,7 @@ REFERENCE_WAVECAL_MODELS = {
         __name__, "data/jwst_niriss_gr700xd_wavelength_model_order1.json"
     ),
     "order2": resource_filename(
-        __name__, "data/jwst_niriss_gr700xd_wavelength_model_order2.json"
+        __name__, "data/jwst_niriss_gr700xd_wavelength_model_order2_002.json"
     ),
 }
 
@@ -33,6 +33,7 @@ class NIRISS_GR700XD_WAVECAL_META:
     Datamodel object container for the wavecal meta data in the json reference
     file.
     """
+
     order: str
     coefficients: npt.NDArray[np.float64]
     intercept: npt.NDArray[np.float64]
@@ -99,9 +100,7 @@ def get_wavecal_meta_for_spectral_order(
     """
     # get the reference wavecal file name
     if order not in REFERENCE_WAVECAL_MODELS:
-        raise ValueError(
-            f"valid orders are: {REFERENCE_WAVECAL_MODELS.keys()}."
-        )
+        raise ValueError(f"valid orders are: {REFERENCE_WAVECAL_MODELS.keys()}.")
 
     # get the appropiate reference file name given the order
     reference_filename = REFERENCE_WAVECAL_MODELS[order]
@@ -119,8 +118,7 @@ def get_wavecal_meta_for_spectral_order(
     scaler_data_max_ = wavecal_model["model"]["scaler"]["data_max_"]
 
     return NIRISS_GR700XD_WAVECAL_META(
-        order, coefficients, intercept, scaler_data_min_, scaler_data_max_,
-        poly_degree
+        order, coefficients, intercept, scaler_data_min_, scaler_data_max_, poly_degree
     )
 
 
@@ -172,9 +170,7 @@ def min_max_scaler(x, x_min, x_max):
     return x_scaled
 
 
-def wavecal_model_order1_poly(
-    x, pwcpos, wavecal_meta: NIRISS_GR700XD_WAVECAL_META
-):
+def wavecal_model_order1_poly(x, pwcpos, wavecal_meta: NIRISS_GR700XD_WAVECAL_META):
     """compute order 1 wavelengths"""
     x_scaler = partial(
         min_max_scaler,
@@ -238,9 +234,7 @@ def wavecal_model_order1_poly(
     return wavelengths
 
 
-def wavecal_model_order2_poly(
-    x, pwcpos, wavecal_meta: NIRISS_GR700XD_WAVECAL_META
-):
+def wavecal_model_order2_poly(x, pwcpos, wavecal_meta: NIRISS_GR700XD_WAVECAL_META):
     """compute order 2 wavelengths"""
     x_scaler = partial(
         min_max_scaler,
@@ -260,11 +254,19 @@ def wavecal_model_order2_poly(
 
     def get_poly_features(x: np.array, offset: np.array) -> np.ndarray:
         """Polynomial features for the order 2 wavecal model"""
-        poly_features = np.array([
-            x, offset, x**2, x * offset,
-            offset**2, x**3,  x**2 * offset,
-            x * offset**2, offset**3
-        ])
+        poly_features = np.array(
+            [
+                x,
+                offset,
+                x**2,
+                x * offset,
+                offset**2,
+                x**3,
+                x**2 * offset,
+                x * offset**2,
+                offset**3,
+            ]
+        )
         return poly_features
 
     # coef and intercept
