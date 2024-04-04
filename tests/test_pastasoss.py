@@ -7,19 +7,6 @@ from pastasoss.soss_traces import REFERENCE_TRACE_FILES
 from pastasoss.wavecal import get_wavecal_meta_for_spectral_order
 
 
-def test_rotate():
-    """Test rotate step to ensure that x coordinate input is return in the
-    output when interpolating back onto the pixel column grid."""
-    x = np.array([1, 2, 3, 4])
-    y = np.array([5, 6, 7, 8])
-
-    x_coords, y_coords = rotate(x, y, 45.0, interp=True)
-
-    assert len(x) == len(x_coords)
-    assert len(y) == len(y_coords)
-    assert x_coords == x
-
-
 def test_load_wavecal_model_order1():
     """Test if wavecol model json files are loaded in correctly and properly
     stored in its datamodel object for order 1"""
@@ -110,3 +97,20 @@ def test_load_order2_trace_model():
 
     assert origin == (1677, 200)
     assert x_limits == (0, 2047)
+
+
+def test_rotate():
+    """Test rotate step to ensure that x coordinate input is return in the
+    output when interpolating back onto the pixel column grid."""
+
+    # using trace model for rotation step
+    ref_trace_file = REFERENCE_TRACE_FILES["order1"]
+    x, y, origin = get_reference_trace(ref_trace_file)
+
+    # rotate
+    angle = 0.2
+    x_coords, y_coords = rotate(x, y, angle, origin, interp=True)
+    # checks
+    assert len(x) == len(x_coords)
+    assert len(y) == len(y_coords)
+    assert np.array_equal(x, x_coords)
