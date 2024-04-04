@@ -15,14 +15,16 @@ docs/source/api/
 htmlcov/
 *.sqlite3
 *.ipynb_checkpoints
-tests/
 git 
 pastasoss/pastasoss.py
 *_v3*.yml 
+misc/*.py
 misc/*
+data/misc
 pastasoss/data/*.fits
 pastasoss/data/*.csv
 pastasoss/data/*.pkl
 notebooks/test_*.ipynb
 .vscode/
 *.yml
+misc/
