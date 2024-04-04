@@ -1,3 +1,5 @@
+import numpy as np
+
 from pastasoss.soss_traces import rotate
 from pastasoss.soss_traces import get_reference_trace
 from pastasoss.soss_traces import REFERENCE_TRACE_FILES
@@ -8,11 +10,13 @@ from pastasoss.wavecal import get_wavecal_meta_for_spectral_order
 def test_rotate():
     """Test rotate step to ensure that x coordinate input is return in the
     output when interpolating back onto the pixel column grid."""
-    x = [1, 2, 3, 4]
-    y = [5, 6, 7, 8]
+    x = np.array([1, 2, 3, 4])
+    y = np.array([5, 6, 7, 8])
 
     x_coords, y_coords = rotate(x, y, 45.0, interp=True)
 
+    assert len(x) == len(x_coords)
+    assert len(y) == len(y_coords)
     assert x_coords == x
 
 
