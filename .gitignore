@@ -28,3 +28,10 @@ notebooks/test_*.ipynb
 .vscode/
 *.yml
 misc/
+
+notebooks/pastasoss_demo copy.ipynb
+notebooks/pastasoss_demo.pdf
+notebooks/pastasoss_demo_solution.html
+notebooks/test_pastasoss_demo_v1_solution.pdf
+notebooks/tracing.ipynb
+tests/__init__.py
