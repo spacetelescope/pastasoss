@@ -165,6 +165,7 @@ def get_soss_wavemaps(pwcpos=PWCPOS_CMD, padding=False, spectraces=False):
 
     # Set cutoff for order 2 where it runs off the detector
     o2_cutoff = 1783
+    print(traces_order1.wavelength, traces_order1.x, traces_order2.wavelength, traces_order2.x)
     w_o2_tmp = traces_order2.wavelength[:o2_cutoff]
     w_o2 = np.zeros(2048) * np.nan
     w_o2[:o2_cutoff] = w_o2_tmp

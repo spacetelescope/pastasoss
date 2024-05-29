@@ -1,2 +1,3 @@
 include pastasoss/data/*.txt
 include pastasoss/data/*.json
+include pastasoss/data/*.fits
