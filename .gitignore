@@ -16,9 +16,12 @@ htmlcov/
 *.sqlite3
 *.ipynb_checkpoints
 git
+
 pastasoss/pastasoss.py
 *_v3*.yml 
+misc/*.py
 misc/*
+data/misc
 pastasoss/data/*.fits
 pastasoss/data/*.csv
 pastasoss/data/*.pkl
@@ -26,6 +29,13 @@ notebooks/test_*.ipynb
 .vscode/
 *.yml
 
-
 !/pastasoss/data/jwst_niriss_spectrace_template.fits
 !/pastasoss/data/jwst_niriss_wavemap_template.fits
+misc/
+
+notebooks/pastasoss_demo copy.ipynb
+notebooks/pastasoss_demo.pdf
+notebooks/pastasoss_demo_solution.html
+notebooks/test_pastasoss_demo_v1_solution.pdf
+notebooks/tracing.ipynb
+tests/__init__.py

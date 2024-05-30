@@ -5,7 +5,7 @@ readme = "README.md"
 authors = [
     {name = "Tyler Baines", email = "tbaines@stsci.edu"},
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "jupyter>=1.0.0",
     "numpy>=1.23.4",

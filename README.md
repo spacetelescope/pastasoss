@@ -23,7 +23,7 @@ As more NIRISS/SOSS observations become increasingly available, we are commited 
 | Spectral Order | Trace Position Model (Pixels)  | Wavelength Solution Model ($\mu m$)| PWCPOS (deg)      | 
 | :------------- | :----------------------------: | :--------------------------------: | :----------:      |
 | Order 1        | [4, 2043]                      | [0.85, 2.83]                       | [245.656, 245.923]|
-| Order 2       | [600, 1750]                    | [0.60, 1.30]                       | [245.656, 245.918]|
+| Order 2        | [0, 1750+]                     | [0.60, 1.42]                       | [245.656, 245.923]|
 | Order 3        | Unsupported                    | Unsupported                        | Unsupported       |
 
 ## Installation
@@ -67,10 +67,9 @@ A concise demonstration [notebook](https://github.com/tbainesUA/pastasoss/blob/d
 ## Get Involved
 
 We welcome community feedback to improve and expand PASTASOSS. 
-Community feedback  and contribution is encouraged! 
 
 
-If you make use of this code, please cite the two JWST technical reports:
 
-- Characterization of the visit-to-visit Stability of the GR700XD Spectral Traces for NIRISS/SOSS Observations: https://arxiv.org/abs/2311.07769
-- Characterization of the visit-to-visit Stability of the GR700XD Wavelength Calibration for NIRISS/SOSS Observations: https://arxiv.org/abs/2311.07771
+If you make use of this code, please cite: 
+- [Characterization of the visit-to-visit Stability of the GR700XD Spectral Traces for NIRISS/SOSS Observations](https://ui.adsabs.harvard.edu/abs/2023arXiv231107769B/abstract)
+- [Characterization of the visit-to-visit Stability of the GR700XD Wavelength Calibration for NIRISS/SOSS Observations](https://ui.adsabs.harvard.edu/abs/2023jwst.rept.8571B/abstract)
