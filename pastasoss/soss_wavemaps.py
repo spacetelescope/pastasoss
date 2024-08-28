@@ -132,7 +132,7 @@ def calc_2d_wave_map(wave_grid, x_dms, y_dms, tilt, oversample=2, padding=10, ma
     return wave_map_2d
 
 
-def get_soss_wavemaps(pwcpos=PWCPOS_CMD, padding=False, spectraces=False):
+def get_soss_wavemaps(pwcpos=PWCPOS_CMD, subarray='SUBSTRIP256', padding=False, padsize=20, spectraces=False):
     """
     Generate order 1 and 2 2D wavemaps from the rotated SOSS trace positions
 
@@ -140,8 +140,12 @@ def get_soss_wavemaps(pwcpos=PWCPOS_CMD, padding=False, spectraces=False):
     ----------
     pwcpos : float
         The pupil wheel position
+    subarray: str
+        The subarray name, ['FULL', 'SUBSTRIP256', 'SUBSTRIP96']
     padding : bool
-        Include 20px padding on map edges (only needed for reference files)
+        Include padding on map edges (only needed for reference files)
+    padsize: int
+        The size of the padding to include on each side
     spectraces : bool
         Return the interpolated spectraces as well
 
@@ -150,7 +154,7 @@ def get_soss_wavemaps(pwcpos=PWCPOS_CMD, padding=False, spectraces=False):
     Array, Array
         The 2D wavemaps and corresponding 1D spectraces
     """
-    traces_order1, traces_order2 = get_soss_traces(pwcpos=pwcpos, order='12', interp=True)
+    traces_order1, traces_order2 = get_soss_traces(pwcpos=pwcpos, order='12', subarray=subarray, interp=True)
 
     # Make wavemap from trace center wavelengths, padding to shape (296, 2088)
     wavemin = 0.5
@@ -161,35 +165,53 @@ def get_soss_wavemaps(pwcpos=PWCPOS_CMD, padding=False, spectraces=False):
     # Extrapolate wavelengths for order 1 trace
     xtrace_order1 = extrapolate_to_wavegrid(wave_grid, traces_order1.wavelength, traces_order1.x)
     ytrace_order1 = extrapolate_to_wavegrid(wave_grid, traces_order1.wavelength, traces_order1.y)
-    spectrace_1 = np.array([xtrace_order1, ytrace_order1])
+    spectrace_1 = np.array([xtrace_order1, ytrace_order1, wave_grid])
 
     # Set cutoff for order 2 where it runs off the detector
     o2_cutoff = 1783
-    print(traces_order1.wavelength, traces_order1.x, traces_order2.wavelength, traces_order2.x)
     w_o2_tmp = traces_order2.wavelength[:o2_cutoff]
-    w_o2 = np.zeros(2048) * np.nan
+    w_o2 = np.zeros(2040) * np.nan
     w_o2[:o2_cutoff] = w_o2_tmp
+    y_o2_tmp = traces_order2.y[:o2_cutoff]
+    y_o2 = np.zeros(2040) * np.nan
+    y_o2[:o2_cutoff] = y_o2_tmp
+    x_o2 = np.copy(traces_order1.x)
 
     # Fill for column > 1400 with linear extrapolation
     m = w_o2[o2_cutoff - 1] - w_o2[o2_cutoff - 2]
-    dx = np.arange(2048 - o2_cutoff) + 1
+    dx = np.arange(2040 - o2_cutoff) + 1
     w_o2[o2_cutoff:] = w_o2[o2_cutoff - 1] + m * dx
+    m = y_o2[o2_cutoff - 1] - y_o2[o2_cutoff - 2]
+    dx = np.arange(2040 - o2_cutoff) + 1
+    y_o2[o2_cutoff:] = y_o2[o2_cutoff - 1] + m * dx
 
     # Extrapolate wavelengths for order 2 trace
-    xtrace_order2 = extrapolate_to_wavegrid(wave_grid, w_o2, traces_order2.x)
-    ytrace_order2 = extrapolate_to_wavegrid(wave_grid, w_o2, traces_order2.y)
-    spectrace_2 = np.array([xtrace_order2, ytrace_order2])
+    xtrace_order2 = extrapolate_to_wavegrid(wave_grid, w_o2, x_o2)
+    ytrace_order2 = extrapolate_to_wavegrid(wave_grid, w_o2, y_o2)
+    spectrace_2 = np.array([xtrace_order2, ytrace_order2, wave_grid])
 
     # Make wavemap from wavelength solution for order 1
-    wavemap_1 = calc_2d_wave_map(wave_grid, xtrace_order1, ytrace_order1, np.zeros_like(xtrace_order1), oversample=1, padding=20)
+    wavemap_1 = calc_2d_wave_map(wave_grid, xtrace_order1, ytrace_order1, np.zeros_like(xtrace_order1), oversample=1, padding=padsize)
 
     # Make wavemap from wavelength solution for order 2
-    wavemap_2 = calc_2d_wave_map(wave_grid, xtrace_order2, ytrace_order2, np.zeros_like(xtrace_order2), oversample=1, padding=20)
+    wavemap_2 = calc_2d_wave_map(wave_grid, xtrace_order2, ytrace_order2, np.zeros_like(xtrace_order2), oversample=1, padding=padsize)
+
+    # Extrapolate wavemap to FULL frame
+    wavemap_1[:-256 - padsize, :] = wavemap_1[-256 - padsize]
+    wavemap_2[:-256 - padsize, :] = wavemap_2[-256 - padsize]
+
+    # Trim to subarray
+    if subarray == 'SUBSTRIP256':
+        wavemap_1 = wavemap_1[1792 - padsize:2048 + padsize, :]
+        wavemap_2 = wavemap_2[1792 - padsize:2048 + padsize, :]
+    if subarray == 'SUBSTRIP96':
+        wavemap_1 = wavemap_1[1792 - padsize:1792 + 96 + padsize, :]
+        wavemap_2 = wavemap_2[1792 - padsize:1792 + 96 + padsize, :]
 
     # Remove padding if necessary
     if not padding:
-        wavemap_1 = wavemap_1[20:-20, 20:-20]
-        wavemap_2 = wavemap_2[20:-20, 20:-20]
+        wavemap_1 = wavemap_1[padsize:-padsize, padsize:-padsize]
+        wavemap_2 = wavemap_2[padsize:-padsize, padsize:-padsize]
 
     if spectraces:
         return np.array([wavemap_1, wavemap_2]), np.array([spectrace_1, spectrace_2])

@@ -132,7 +132,7 @@ def get_reference_trace(
 
 
 def get_soss_traces(
-    pwcpos: float, order: str = "123", interp: bool = True
+    pwcpos: float, order: str = "123", subarray: str = 'SUBSTRIP256', interp: bool = True
 ) -> Tuple[np.ndarray, np.ndarray]:
     """
     This is the primary method for generate the gr700xd trace position given a
@@ -151,6 +151,8 @@ def get_soss_traces(
     order : str, optional
         The spectral order to compute the new traces for. Default is '123'.
         Support for order 3 will be added at a later date.
+    subarray : str
+        The subarray being used, ['SUBSTRIP96', 'SUBSTRIP256']
     interp : bool, optional
         Whether to interpolate the rotated positions onto the original x-pixel
         column values. Default is True.
@@ -182,7 +184,7 @@ def get_soss_traces(
         raise ValueError("order must be: 1,2, 3.")
     if norders > 1:
         # recursively compute the new traces for each order
-        return [get_soss_traces(pwcpos, m) for m in order]
+        return [get_soss_traces(pwcpos, m, subarray) for m in order]
 
     # This might be an alternative way of writing this
     # if 'order'+order in REFERENCE_TRACE_FILES.keys():
@@ -202,6 +204,10 @@ def get_soss_traces(
 
     # reference trace data
     x, y, origin = get_reference_trace(ref_trace_file)
+
+    # Offset for SUBSTRIP96
+    if subarray == 'SUBSTRIP96':
+        y -= 10
 
     # rotated reference trace
     x_new, y_new = rotate(x, y, pwcpos - PWCPOS_CMD, origin, interp=interp)
