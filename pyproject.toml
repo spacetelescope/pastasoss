@@ -1,6 +1,6 @@
 [project]
 name = "pastasoss"
-description = "My package description"
+description = "Tool to predict the spectral traces for any NIRISS/SOSS observation"
 readme = "README.md"
 authors = [{ name = "Tyler Baines", email = "tbaines@stsci.edu" }]
 requires-python = ">=3.10"
