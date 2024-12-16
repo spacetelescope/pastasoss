@@ -53,4 +53,10 @@ planned but not implemented in this version (should be v1.1 now)
 so 3.10 will now be the the minimum version.
 - also making additional to changes to some test and removing the duplicate
 test folder that was present. 
-- 
+
+
+
+# [1.2.1] - 2024-12-16
+### Added
+- removed unused .yml files and requirement.txt
+- update pyproject.toml file with required pacakage as we as numpy support below version 2.0 to address open issue #13. 
