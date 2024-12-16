@@ -2,22 +2,20 @@
 name = "pastasoss"
 description = "My package description"
 readme = "README.md"
-authors = [
-    {name = "Tyler Baines", email = "tbaines@stsci.edu"},
-]
+authors = [{ name = "Tyler Baines", email = "tbaines@stsci.edu" }]
 requires-python = ">=3.10"
 dependencies = [
     "jupyter>=1.0.0",
-    "numpy>=1.23.4",
+    "numpy<2.0.0",
     "matplotlib>=3.6.2",
     "pytest>=7.2.0",
+    "scipy>=1.10.1",
 ]
 
 dynamic = ["version"]
 
 [build-system]
-requires = ["setuptools >= 61.2",
-            "setuptools_scm[toml]>=7.1"]
+requires = ["setuptools >= 61.2", "setuptools_scm[toml]>=7.1"]
 build-backend = 'setuptools.build_meta'
 
 [tool.setuptools.packages.find]
