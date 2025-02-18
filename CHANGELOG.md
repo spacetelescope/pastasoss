@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Change log adopted from the transitspectroscopy package by Nestor Espinoza. 
 
 
+# [1.2.2] - 2024-02-18
+### Added
+- update pyproject.toml file with required pacakage to support scipy>=1.8.0 to address issue #13 to resolve dependency conflicts. 
+
+
 # [1.2.1] - 2024-12-16
 ### Added
 - removed unused .yml files and requirement.txt
