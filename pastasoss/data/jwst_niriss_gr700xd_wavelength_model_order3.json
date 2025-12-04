@@ -1,0 +1,62 @@
+{
+    "date": "2025-07-28 13:19:39",
+    "train_data": "SOSS_Wavelength_Calibration.ipynb",
+    "calib_target": "BD+60-1753",
+    "model": {
+        "info": "\n    Polynomial Regression model using sklearn package with a model containing\n    the following step: MinMaxScaling, PolyFeatures, LinearRegression. The \n    metadata regarding the fitted model is provided that summarizes the key aspects\n    ",
+        "poly_deg": 3,
+        "coef": [
+            -0.29808357025611065,
+            -0.0026759517787119493,
+            0.002251094004941057,
+            -0.0008227220884288131,
+            0.0036842469619835392,
+            0.02692626320154394,
+            0.0016213389874094918,
+            0.0010002567572258915,
+            -0.002368064755344607
+        ],
+        "intercept": 0.9245201664057487,
+        "polyfeature_names": [
+            "x",
+            "offset",
+            "x^2",
+            "x offset",
+            "offset^2",
+            "x^3",
+            "x^2 offset",
+            "x offset^2",
+            "offset^3"
+        ],
+        "scaler": {
+            "feature_range": [
+                0,
+                1
+            ],
+            "feature_names_in_": [
+                "x",
+                "offset"
+            ],
+            "scale_": [
+                0.0010758544474945763,
+                3.753274732203794
+            ],
+            "min_": [
+                -0.10624412655270263,
+                0.38865910506919593
+            ],
+            "data_min_": [
+                98.75325310047411,
+                -0.10355200000000764
+            ],
+            "data_max_": [
+                1028.2470171768095,
+                0.1628819999999962
+            ],
+            "data_range_": [
+                929.4937640763354,
+                0.26643400000000383
+            ]
+        }
+    }
+}
