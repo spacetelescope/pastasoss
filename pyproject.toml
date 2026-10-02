@@ -6,7 +6,7 @@ authors = [{ name = "Tyler Baines", email = "tbaines@stsci.edu" }]
 requires-python = ">=3.10"
 dependencies = [
     "jupyter>=1.0.0",
-    "numpy<2.0.0",
+    "numpy",
     "matplotlib>=3.6.2",
     "pytest>=7.2.0",
     "scipy>=1.8.0",
